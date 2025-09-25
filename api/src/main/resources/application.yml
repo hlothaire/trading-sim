@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:trader;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ''
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc.time_zone: UTC
+    jackson:
+      serialization:
+        WRITE_DATES_AS_TIMESTAMPS: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:postgresql://localhost:5432/trader
+    username: trader
+    password: trader
+  jpa:
+    hibernate:
+      ddl-auto: validate
